@@ -1,32 +1,36 @@
-<div class='row' id='log'>
+<div id='log'>
 	<form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php">
-		<div class="form-group">
+		<div class="form-group col-12">
 			<label for="inputUsuario" class="col-lg-offset-2 col-lg-2 control-label">Usuario</label>
 			<div class="col-lg-4">
 				<input type="text" class="form-control" id="inputUsuario" placeholder="Usuario">
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group col-12">
 			<label for="inputGrupo" class="col-lg-offset-2 col-lg-2 control-label">Grupo</label>
 			<div class="col-lg-4">
 				<input type="text" class="form-control" id="inputGrupo" placeholder="Grupo">
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group col-12">
 			<label for="inputPassword" class="col-lg-offset-2 col-lg-2 control-label">Password</label>
 			<div class="col-lg-4">
 				<input type="password" class="form-control" id="inputPassword" placeholder="Password">
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group col-12">
 			<div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
-				<button type="submit" class="btn btn-primary" onClick="validar.php">Sign in</button>
-				<button class="btn btn-default" >Sign Up</button>
+				<button type="submit" id='signin' class="btn btn-primary" onClick="validar.php">Sign in</button>
+				<button class="btn btn-default" id='signup'>Sign Up</button>
 			</div>
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
+	$('#signup').click(function(e) {
+		e.preventDefault()
+		load('signup')
+	})
 	$(window).resize(function() {
 		$('#log').css('margin-top',(window.innerHeight-196)/2)
 	})
@@ -37,4 +41,7 @@
 			$('#container').append(data)
 		})
 	})
+	$('#log').css('margin-top',(window.innerHeight-196)/2)
+	$('#logo').addClass('hide')
+
 </script>
