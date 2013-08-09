@@ -1,9 +1,45 @@
-
+#header{
+	background-color: #2E2E2E;
+	height: 125px;
+}
 
 #textoHeader{
 	color:white;
 	text-align: center;
+	font-family: Comic Sans MS;
+	font-size: 50px;
+
+}
+
+#textoComapania{
+	font-size: 30px;
+	color:white;
+	text-align: center;
+	margin: 0px auto;
+}
+
+#infoEmprresa{
 	font-family: arial;
+	font-weight: bold;
+}
+
+#btns{
+	margin-top: 20px;
+}
+
+.btnladero{
+	width: 200px;
+}
+
+.row{
+	margin: 0px;
+}
+
+.textChamu{
+	font-family: arial;
+	font-size: 18px;
+	text-align: justify;
+	text-indent: 50px;
 }
 
 /* ==========================================================================
