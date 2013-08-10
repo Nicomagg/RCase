@@ -1,8 +1,14 @@
 <?php 
     if (!isset($_SESSION)) {
-     session_start();
+        session_start();
     }
     include('coneccion.php');
+    //Validamos la entrada al grupo
+    if(!isset($_SESSION['grupo'])){
+        echo '<script language = javascript>
+        alert("No tienes permiso para ver esta pagina");
+        self.location = "index.html"</script>';
+    }
 ?>
 <!DOCTYPE html>
 <html class="no-js">
@@ -34,9 +40,8 @@
         <?php 
             $result = traerProyectos();
             if($result){
-                for ($i=0;!is_null($result) && $i<sizeof($result); $i+=1) {
-                    $cosas = mysqli_fetch_array($result);
-                    echo '<a href="paginaProyecto.php?nombre='.$cosas['nombreProyecto'].'">',$cosas['nombreProyecto']."<br />";
+                while ($cosas = mysqli_fetch_array($result)) {
+                    echo '<a href="paginaProyecto.php?proyecto='.$cosas['nombreProyecto'].'">',$cosas['nombreProyecto']."<br />";
                 }
             }
          ?>

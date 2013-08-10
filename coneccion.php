@@ -3,21 +3,25 @@
 
 function ejecutar($consulta){
 	//echo $usuario.'<br>';
-  $con=mysqli_connect("localhost","root","","rcase");
-  // Check connection
-  $var = mysqli_query($con,$consulta);
-  mysqli_close($con);
-  return $var;
+	$con=mysqli_connect("localhost","root","","rcase");
+	// Check connection
+	$var = mysqli_query($con,$consulta);
+	mysqli_close($con);
+	return $var;
 }
 
 function validarLogin($usuario,$contra,$grupo){
-
-	$datos = ejecutar("select * from grupo where usuario='".$usuario."' AND contrasenia='".$contra."' AND nombreGrupo = '".$grupo."' ");
-
+	$datos = ejecutar("select * ".
+		" from grupo ".
+		" where usuario='".$usuario."' ".
+		" AND contrasenia='".$contra."' ".
+		" AND nombreGrupo = '".$grupo."' ");
 	$fila=mysqli_fetch_array($datos);
-
-	return $fila[0]; //opcion1: Si el usuario NO existe o los datos son INCORRRECTOS
+	//opcion1: Si el usuario NO existe o los datos son INCORRRECTOS
+	return $fila[0]; 
 }
+
+//--------Ver Cosas--------
 
 function verIdGrupo(){
 	$result = ejecutar("SELECT idG".
@@ -27,13 +31,32 @@ function verIdGrupo(){
 	return $idG[0];
 }
 
-function verIdProyecto(){
+function verIdProyecto($proyecto){
 	$result = ejecutar("SELECT idP".
 	" FROM `proyectos` ".
-	" WHERE nombreProyecto = '".$_SESSION['nombreProyecto']."' ");
+	" WHERE nombreProyecto = '".$proyecto."'".
+	" AND idG = ".verIdGrupo());
 	$idG = mysqli_fetch_array($result);
 	return $idG[0];
 }
+
+//--------Traer Cosas--------
+
+function traerProyectos(){
+	$result = ejecutar("SELECT nombreProyecto".
+			" FROM `proyectos` ".
+			" WHERE idG = ".verIdGrupo());
+	return $result;
+}
+
+function traerRequerimientos($proyecto){
+	$result = ejecutar("SELECT idR, descripcion".
+			" FROM `requerimientos` ".
+			" WHERE idP = ".verIdProyecto($proyecto));
+	return $result;
+}
+
+//--------Cargar Cosas--------
 
 function cargarGrupo($usuario,$contra,$grupo){
 	//Antes que nada nos aseguramos que no exista el grupo ni el usuario
@@ -114,37 +137,48 @@ function cargarProyecto($nombreP,$nombreC,$telefono){
 	//Tomamos el id del grupo
 	$idG = verIdGrupo();
 	try {
+		//Nos aseguramos que
+		//no haya un proyecto con el mismo nombre
+		$result = ejecutar("SELECT count(*) ".
+			"FROM proyectos ".
+			"WHERE idG = ".$idG." AND nombreProyecto = '".$nombreP."'");
+		$cant = mysqli_fetch_array($result);
+		if($cant[0] > 0) return 1;
+
 		//Tomamos el ID para asignarle
 		$result = ejecutar("SELECT max( idP ) ".
-			"FROM proyectos ".
-			"WHERE idG = ".$idG);
+			"FROM proyectos");
 
 		$id = mysqli_fetch_array($result);
 		if(is_null($id[0])) $id[0] = 1;
 		else $id[0] = $id[0] + 1;
 
-		echo 'ID obtenido: '.$id[0];
-
 		//Cargamos un nuevo proyecto
 		$consulta = "insert into proyectos ".
 		"values(".$id[0].",'".$nombreP."','".$nombreC."',".$telefono.",".$idG.")";
-		echo 'consulta'.$consulta;
 		ejecutar($consulta);
 	} catch (Exception $e) {
 		echo $e;
-		return false;
+		return 2;
 	}
-	return true;
+	return 0;
 }
 
-function cargarRequerimiento($descripcion){
-	//Tomamos el id del grupo
-	$idP = verIdProyecto();
+function cargarRequerimiento($descripcion,$proyecto){
+	//Tomamos el id del proyecto
+	$idP = verIdProyecto($proyecto);
 	try {
+		//Nos aseguramos que
+		//no haya un requerimiento con el mismo nombre
+		$result = ejecutar("SELECT count(*) ".
+			"FROM requerimientos ".
+			"WHERE idP = ".$idP." AND descripcion = '".$descripcion."'");
+		$cant = mysqli_fetch_array($result);
+		if($cant[0] > 0) return -2;
+
 		//Tomamos el ID para asignarle
 		$result = ejecutar("SELECT max( idR )".
-			" FROM `requerimientos` ".
-			" WHERE idP = ".$idP);
+			" FROM `requerimientos`");
 		$id = mysqli_fetch_array($result);
 		if(is_null($id[0])) $id[0] = 1;
 		else $id[0] = $id[0] + 1;
@@ -155,23 +189,9 @@ function cargarRequerimiento($descripcion){
 		ejecutar($consulta);
 	} catch (Exception $e) {
 		echo $e;
-		return $id[0];
+		return -1;
 	}
-	return "";
-}
-
-function traerProyectos(){
-	$result = ejecutar("SELECT nombreProyecto".
-			" FROM `proyectos` ".
-			" WHERE idG = ".verIdGrupo());
-	return $result;
-}
-
-function traerRequerimientos(){
-	$result = ejecutar("SELECT idR, descripcion".
-			" FROM `requerimientos` ".
-			" WHERE idP = ".verIdProyecto());
-	return $result;
+	return $id[0];
 }
 
 ?>

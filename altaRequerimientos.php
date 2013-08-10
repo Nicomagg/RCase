@@ -1,9 +1,11 @@
+<?php include ('validarEncabezado.php'); ?>
+
 <!DOCTYPE html>
 <html class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Alta Requerimiento</title>
         <meta name="altaRequerimiento" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -30,9 +32,27 @@
 				<div class="form-group">
 					<label for="inputUsuario" class="col-lg-offset-2 col-lg-2 control-label">Descripcion</label>
 					<div class="col-lg-4">
-						<input type="text" name="descripcion" class="form-control" id="inputUsuario" placeholder="Usuario">
+						<input type="text" name="descripcion" class="form-control" id="inputUsuario" placeholder="Descripcion">
 					</div>
 				</div>
+                <div class="form-group">
+                    <label for="inputProyecto" class="col-lg-offset-2 col-lg-2 control-label">Proyecto</label>
+                    <div class="col-lg-4">
+                        <select name="Proyecto">
+                            <?php 
+                                $result = traerProyectos();
+                                if($result){
+                                    while ($cosas = mysqli_fetch_array($result)) {
+                                        echo '<option value="'.$cosas['nombreProyecto'].
+                                        '">'.$cosas['nombreProyecto'].'</option>';
+                                    }
+                                }
+                                //<option value="Cosas" selected>Cosas</option>'
+                             ?>
+
+                        </select> 
+                    </div>
+                </div>
 				<div class="form-group">
 					<div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
 						<button type="submit" name="altaRequerimiento" class="btn btn-default" onClick="validar.php;">Sign Up</button>

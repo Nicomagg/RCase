@@ -1,10 +1,22 @@
 <?php 
-    if (!isset($_SESSION)) {
-     session_start();
+    include ('validarEncabezado.php');
+
+    //Validamos que entre un id de requerimiento
+    if(!isset($_GET['idR'])){
+        echo '<script language = javascript>
+        alert("debes elegir un requerimiento una descripcion");
+        self.location = "paginaGrupo.php"</script>';
     }
-    include ('coneccion.php');
-    if(isset($_GET['idR']))$_SESSION['idR'] = $_GET['idR'];
-    if(isset($_GET['descripcion']))$_SESSION['descripcion'] = $_GET['descripcion'];
+    //Validamos que el requerimiento sea de un proyecto
+    //validar que ese proyecto sea de ese grupo
+    /*
+    $result = ejecutar("select idP from requerimientos".
+        " where idR = ".$_GET['idR']);
+    $ = mysqli_fetch_array($result);
+    if($hayAlgo[0] < 1) echo '<script language = javascript>
+        alert("Parece que este proyecto no pertenece a este grupo");
+        self.location = "paginaGrupo.html"</script>';
+        */
 ?>
 <!DOCTYPE html>
 <html class="no-js">

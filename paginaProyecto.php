@@ -1,16 +1,27 @@
 <?php 
-    if (!isset($_SESSION)) {
-     session_start();
+    include ('validarEncabezado.php');
+
+    //Si no pone el nombre del proyecto...
+    if(!isset($_GET['proyecto'])){
+        echo '<script language = javascript>
+        alert("debes elegir un proyecto");
+        self.location = "paginaGrupo.php"</script>';
     }
-    include('coneccion.php');
-    if(isset($_GET['nombre'])) $_SESSION['nombre'] = $_GET['nombre'];
+    //validar que ese proyecto sea de ese grupo
+    $result = ejecutar("select count(*) from proyectos".
+        " where nombreProyecto = '".$_GET['proyecto']."'".
+        " AND idG = ".verIdGrupo());
+    $hayAlgo = mysqli_fetch_array($result);
+    if($hayAlgo[0] < 1) echo '<script language = javascript>
+        alert("Parece que este proyecto no pertenece a este grupo");
+        self.location = "paginaGrupo.php"</script>';
 ?>
 <!DOCTYPE html>
 <html class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Home <?php echo $_SESSION['nombre']; ?></title>
+        <title><?php echo $_SESSION['grupo'].'/'.$_GET['proyecto']; ?></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -28,22 +39,21 @@
                     <span class="icon-bar"></span>
                 </button>
                 <label class='navbar-brand'>RCase</label>
-                 <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
+                <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
             </div>
         </div>
         <h3>Requerimientos</h3><br><br>
         <?php 
-            $result = traerRequerimientos();
-            if(!is_null($result[0])){
-                for ($i=0;$i<sizeof($result); $i+=1) {
-                    $cosas = mysqli_fetch_array($result);
+            $result = traerRequerimientos($_GET['proyecto']);
+            if($result){
+                while ($cosas = mysqli_fetch_array($result)) {
                     echo '<a href="paginaRequerimientos.php?id='.$cosas['idR'].'&descrip='.$cosas['descripcion'].'">',$cosas['descripcion']."<br />";
                 }
             }
          ?>
          <br><br>
-        <a href="altaRequerimientos.html">
-            <button type="button" class="btn btn-info" onClick="self.location = altaRequerimientos.html">
+        <a href="altaRequerimientos.php">
+            <button type="button" class="btn btn-info" onClick="self.location = altaRequerimientos.php">
                 Nuevo Requerimiento</button></a>
         
             
