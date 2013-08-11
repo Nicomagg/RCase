@@ -1,58 +1,46 @@
 <?php 
-    include ('validarEncabezado.php');
+include ('validarEncabezado.php');
 
-    //Validamos que entre un id de requerimiento
-    if(!isset($_GET['idR'])){
-        echo '<script language = javascript>
-        alert("debes elegir un requerimiento una descripcion");
-        self.location = "paginaGrupo.php"</script>';
-    }
-    //Validamos que el requerimiento sea de un proyecto
-    //validar que ese proyecto sea de ese grupo
-    /*
-    $result = ejecutar("select idP from requerimientos".
-        " where idR = ".$_GET['idR']);
-    $ = mysqli_fetch_array($result);
-    if($hayAlgo[0] < 1) echo '<script language = javascript>
-        alert("Parece que este proyecto no pertenece a este grupo");
-        self.location = "paginaGrupo.html"</script>';
-        */
+//Validamos que entre un id de requerimiento
+if(!isset($_GET['id']))
+    mensajeRedir("debes elegir un requerimiento y una descripcion",
+        "paginaGrupo.php");
+//Validamos que el requerimiento sea de un proyecto
+//y que ese proyecto sea de ese grupo
+//Traemos el nombre del grupo segun el requerimiento que entro
+$result = ejecutar("SELECT g.nombreGrupo ".
+        "FROM `requerimientos` r ".
+        "INNER JOIN `proyectos` p ON r.idP = p.idP ".
+        "INNER JOIN `grupo` g ON g.idG = p.idG ".
+        "WHERE r.idR = ".$_GET['id']);
+if(!$result)
+    mensajeRedir("NO se puede encontrar el Requerimiento","paginaGrupo.php"); 
+$nombre = mysqli_fetch_array($result);
+if($nombre[0] != $_SESSION['grupo'])
+    mensajeRedir("Parece que este requerimiento ".
+        "no pertenece a un proyecto de este grupo","paginaGrupo.php");
+//OK todo bien hasta aca...
+//Traemos los datos que faltan
+$descripcion = traerUno("select descripcion from `requerimientos` ".
+    "WHERE idR = ".$_GET['id']);
+$idP = traerUno("select idP from `requerimientos` ".
+    "WHERE idR = ".$_GET['id']);
+$proyecto = traerUno("select nombreProyecto from `proyectos` ".
+    "WHERE idP = ".$idP);
 ?>
 <!DOCTYPE html>
 <html class="no-js">
     <head>
-            <style> 
-                th:nth-child(n)
-                {
-                    background:#C0BDE4;
-                }
-            </style>
+        <style> th:nth-child(n) { background:#C0BDE4; } </style>
+        <style>  #oculto{ display: none;} </style>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Requistos para: <?php echo $_SESSION['grupo']; ?></title>
+        <title><?php echo $_SESSION['grupo'].'/'.$proyecto.'/'.$descripcion ; ?></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
-
         <script type="text/javascript" src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <script type="text/javascript"><!--
-        function getVal(e) {
-            var targ;
-            if (!e) var e = window.event;
-            if (e.target) targ = e.target;
-            else if (e.srcElement) targ = e.srcElement;
-            if (targ.nodeType == 3) // defeat Safari bug
-            targ = targ.parentNode;
-
-             alert(targ.innerHTML);
-        onload = function() {
-            var t = document.getElementById("main").getElementsByTagName("td");
-            for ( var i = 0; i < t.length; i++ )
-                t[i].onclick = getVal;
-            }
-
-    </script>
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
@@ -63,46 +51,55 @@
                     <span class="icon-bar"></span>
                 </button>
                 <label class='navbar-brand'>RCase</label>
-                 <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
+                <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
             </div>
         </div>
-        <?php 
-        //Tabla Beto
-        /*
-                        <div class="col-lg-6 col-lg-offset-3">
-                            <table class="table table-bordered" id="main">
-                                <thead>
-                                    <tr>
-                                        <th>ID Reque.</th>
-                                        <th>Nombre Proyecto</th>
-                                        <th>Cliente</th>
-                                        <th>Telefono</th>
-                                        <th>Descripcion</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>SAAR</td>
-                                        <td>Informatorio</td>
-                                        <td>3624587458</td>
-                                        <td>Alta de presos</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>WTYU</td>
-                                        <td>Informatorio</td>
-                                        <td>3624587458</td>
-                                        <td>Subir mp3</td>
-                                    </tr>
-                                </tbody>
-                            </table> 
-                        </div>
-        */ ?>
-                        <div class="col-lg-6 col-lg-offset-3">
-                            <button type="button" class="btn btn-success">Editar</button>
-                            <a href="index.html"><button type="button" class="btn btn-warning" onClick="self.location = index.html">Atras</button></a>
-                        </div>
+
+        <h3>Requisitos</h3><br><br>
+        <div class="col-lg-6 col-lg-offset-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Entrada</th>
+                        <th>Salida</th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <?php 
+                $result = ejecutar("SELECT * FROM `requisitos` WHERE idR = ".$_GET['id']);
+                if($result){
+                    echo '<tbody>';
+                    while ($cosas = mysqli_fetch_array($result)) {
+                        echo '<tr>';
+                            echo '<td>';
+                                echo '<a href="paginaRequisitos.php?id='.$cosas['idReq'].'">';
+                                echo $cosas['Nombre'];
+                                echo '</a>';
+                                echo '</td>';
+                            echo '<td>'.$cosas['Descripcion'].'</td>';
+                            echo '<td>'.$cosas['Entrada'].'</td>';
+                            echo '<td>'.$cosas['Salida'].'</td>';
+                            echo '<td>'.$cosas['Prioridad'].'</td>';
+                            echo '<td>'.$cosas['Estado'].'</td>';
+                        echo '</tr>';
+                        
+                    }
+                    echo '</tbody>';
+                }
+                ?>
+            </table> 
+        </div>
+        <br>
+        <br>
+        <br>
+        <form class='form-horizontal' action="altaRequisitos.php" method="POST" onSubmit="altaRequisitos.php" name="idR">
+                <input id="oculto" type="text" name="idR" value=<?php echo '"'.$_GET['id'].'"'; ?>
+                class="btn btn-default" />
+                <input value="Cargar Un Nuevo Requisito" type="submit" class="btn btn-default"></input>
+        </form>
 
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>

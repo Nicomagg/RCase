@@ -1,10 +1,35 @@
 <?php
 
+if (!isset($_SESSION)) {
+    session_start();
+}
 include('coneccion.php');
 
-//Inicio de variables de sesión
-if (!isset($_SESSION)) {
-  session_start();
+if(isset($_POST['loginGrupo'])){
+	if(validarLogin($_POST['usuario'],$_POST['pass'],$_POST['grupo'])){
+		//Definimos las variables de sesión y redirigimos a la página
+		//$_SESSION['usuario'] = $_POST['usuario'];
+		//$_SESSION['pass'] = $_POST['pass'];
+		$_SESSION['grupo'] = $_POST['grupo'];
+
+		echo '<script language = javascript>
+		self.location = "paginaGrupo.php"
+		</script>';
+			
+	}else{
+		echo '<script language = javascript>
+			alert("Parece que te equivocaste en algo");
+			self.location = "index.html"
+			</script>';
+	}
+}
+
+//Validamos la entrada al grupo en caso que estee
+//Accediendo a la pagina de onda...
+if(!isset($_SESSION['grupo'])){
+    echo '<script language = javascript>
+    alert("No tienes permiso para ver esta pagina");
+    self.location = "index.html"</script>';
 }
 
 //echo $_POST['usuario'];
@@ -23,13 +48,32 @@ if(!isset($_POST['grupo'])){
 	$mal = true;
 }*/
 
+if(isset($_POST['altaRequisito'])) {
+	$result = cargarRequisito($_POST['Nombre'],$_POST['Descripcion'],
+		$_POST['Entradas'],$_POST['Salidas'],
+		$_POST['Prioridad'],$_POST['Estado'],$_POST['idR']);
+	if($result >  0)
+		mensajeRedir("requisito cargado correctamente al requerimiento",
+			"paginaRequisitos.php?id=".$result);
+	else if($result == -1)
+		mensajeRedir("no se pudo cargar el requisito",
+			"paginaRequerimientos.php?id=".$_POST['idR']);
+	else if($result == -2){
+		mensajeRedir("Ya hay cargado un requisito ".
+			"con el mismo nombre para ese requerimiento",
+			"paginaRequerimientos.php?id=".$_POST['idR']);
+	}
+	//Entro un id que nada que ver
+	else if($result == -3)  
+		mensajeRedir("Parece que estas tratando de enviar in id".
+            "que no pertenece a un requerimiento de este grupo","paginaGrupo.php");
+}
 if(isset($_POST['altaRequerimiento'])) {
 	$result = cargarRequerimiento($_POST['descripcion'],$_POST['Proyecto']);
 	if($result >  0){
-		//$_SESSION['descripcion'] = $_POST['descripcion'];
 		echo '<script language = javascript>
 		alert("requerimiento cargado correctamente al grupo");
-		self.location = "paginaRequerimiento.php?id='.$result.'&descripcion='.$_POST['descripcion'].'"</script>';
+		self.location = "paginaRequerimientos.php?id='.$result.'&descripcion='.$_POST['descripcion'].'"</script>';
 	}
 	else if($result == -1){
 		echo '<script language = javascript>
@@ -89,23 +133,6 @@ if(isset($_POST['altaGrupo'])) {
 		self.location = "index.html"</script>';
 	}
 }
-if(isset($_POST['loginGrupo'])){
-	if(validarLogin($_POST['usuario'],$_POST['pass'],$_POST['grupo'])){
-		//Definimos las variables de sesión y redirigimos a la página
-		//$_SESSION['usuario'] = $_POST['usuario'];
-		//$_SESSION['pass'] = $_POST['pass'];
-		$_SESSION['grupo'] = $_POST['grupo'];
 
-		echo '<script language = javascript>
-		self.location = "paginaGrupo.php"
-		</script>';
-			
-	}else{
-		echo '<script language = javascript>
-			alert("Parece que te equivocaste en algo");
-			self.location = "index.html"
-			</script>';
-	}
-}
 
 ?>

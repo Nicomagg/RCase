@@ -40,15 +40,22 @@
                     <div class="col-lg-4">
                         <select name="Proyecto">
                             <?php 
-                                $result = traerProyectos();
-                                if($result){
-                                    while ($cosas = mysqli_fetch_array($result)) {
+                            $result = traerProyectos();
+                            if($result){
+                                while ($cosas = mysqli_fetch_array($result)) {
+                                    //Si se paso un proyecto por parametro
+                                    //lo seleccionamos por defecto
+                                    if(isset($_GET['proyecto']) && 
+                                        $_GET['proyecto'] == $cosas['nombreProyecto'])
+                                        echo '<option value="'.$cosas['nombreProyecto'].
+                                        '" selected>'.$cosas['nombreProyecto'].'</option>';    
+                                    else
                                         echo '<option value="'.$cosas['nombreProyecto'].
                                         '">'.$cosas['nombreProyecto'].'</option>';
-                                    }
                                 }
-                                //<option value="Cosas" selected>Cosas</option>'
-                             ?>
+                            }
+                            //<option value="Cosas" selected>Cosas</option>'
+                            ?>
 
                         </select> 
                     </div>

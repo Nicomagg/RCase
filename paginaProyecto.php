@@ -8,11 +8,11 @@
         self.location = "paginaGrupo.php"</script>';
     }
     //validar que ese proyecto sea de ese grupo
-    $result = ejecutar("select count(*) from proyectos".
+    $hayAlgo = traerUno("select count(*) from proyectos".
         " where nombreProyecto = '".$_GET['proyecto']."'".
         " AND idG = ".verIdGrupo());
-    $hayAlgo = mysqli_fetch_array($result);
-    if($hayAlgo[0] < 1) echo '<script language = javascript>
+
+    if($hayAlgo < 1) echo '<script language = javascript>
         alert("Parece que este proyecto no pertenece a este grupo");
         self.location = "paginaGrupo.php"</script>';
 ?>
@@ -51,8 +51,8 @@
                 }
             }
          ?>
-         <br><br>
-        <a href="altaRequerimientos.php">
+        <br><br>
+         <?php echo '<a href="altaRequerimientos.php?proyecto='.$_GET["proyecto"].'">';?>
             <button type="button" class="btn btn-info" onClick="self.location = altaRequerimientos.php">
                 Nuevo Requerimiento</button></a>
         
