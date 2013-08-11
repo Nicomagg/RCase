@@ -1,6 +1,6 @@
 <?php
 //Validamos que entre un id de requerimiento
-include ('validarEncabezado.php'); 
+include ('barrita.php');
 if(!isset($_POST['idR']))
     mensajeRedir("debes acceder desde la pagina de un requerimiento",
         "paginaGrupo.php");

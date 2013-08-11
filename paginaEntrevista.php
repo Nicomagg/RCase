@@ -1,6 +1,5 @@
 <?php 
-include ('validarEncabezado.php');
-
+include ('barrita.php');
 //Validamos que entre un id de requerimiento
 if(!isset($_GET['id']))
     mensajeRedir("debes elegir una entrevista",
@@ -43,6 +42,7 @@ $proyecto = traerUno("select nombreProyecto from `proyectos` ".
         <script type="text/javascript" src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
+        <br><?php menuEntrevistas($proyecto,$descripcion,$_GET['id']); ?><br>
         <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
             <div class="container" id="header">
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">

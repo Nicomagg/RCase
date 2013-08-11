@@ -122,7 +122,7 @@ function verIdProyecto($proyecto){
 //--------Traer Cosas--------
 
 function traerProyectos(){
-	$result = ejecutar("SELECT nombreProyecto".
+	$result = ejecutar("SELECT * ".
 			" FROM `proyectos` ".
 			" WHERE idG = ".verIdGrupo());
 	return $result;
@@ -132,6 +132,21 @@ function traerRequerimientos($proyecto){
 	$result = ejecutar("SELECT idR, descripcion".
 			" FROM `requerimientos` ".
 			" WHERE idP = ".verIdProyecto($proyecto));
+	return $result;
+}
+
+function traerEntrevistas($proyecto){
+	$result = ejecutar("SELECT * ".
+			" FROM `entrevistas` ".
+			" WHERE idP = ".verIdProyecto($proyecto));
+	return $result;
+}
+
+function traerPersonas(){
+	$result = ejecutar("SELECT * FROM `personas` p ".
+		" inner join `personas grupo` pg on p.idPer = pg.idPer ".
+		" inner join `grupo` g on g.idG = pg.idG ".
+		" WHERE g.idG = ".verIdGrupo());
 	return $result;
 }
 
@@ -145,6 +160,44 @@ function proximoId($tabla,$campo){
 	return $id[0];
 }
 
+//--------Menu de Cosas--------
+//Menu de Pagina Grupo
+function menuGrupo(){
+	echo '<a href="paginaGrupo.php">'.$_SESSION['grupo'].'</a>';
+}
+//Menu de Pagina Proyecto
+function menuProyecto($proyecto){
+	echo '<a href="paginaGrupo.php">'.$_SESSION['grupo'].'</a>';
+	echo ' / ';
+	echo '<a href="paginaProyecto.php?proyecto='.$proyecto.'">'.$proyecto.'</a>';
+}
+//Menu de Pagina Requerimiento
+function menuRequerimiento($proyecto,$descripcion,$idR){
+	echo '<a href="paginaGrupo.php">'.$_SESSION['grupo'].'</a>';
+	echo ' / ';
+	echo '<a href="paginaProyecto.php?proyecto='.$proyecto.'">'.$proyecto.'</a>';
+	echo ' / ';
+	echo '<a href="paginaRequerimientos.php?id='.$idR.'">'.$descripcion.'</a>';
+}
+//Menu de Pagina Requisito
+function menuRequisito($proyecto,$rId,$rDescripcion,$reqDescripcion,$idReq){
+	echo '<a href="paginaGrupo.php">'.$_SESSION['grupo'].'</a>';
+	echo ' / ';
+	echo '<a href="paginaProyecto.php?proyecto='.$proyecto.'">'.$proyecto.'</a>';
+	echo ' / ';
+	echo '<a href="paginaRequerimientos.php?id='.$rId.'">'.$rDescripcion.'</a>';
+	echo ' / ';
+	echo '<a href="paginaRequisitos.php?id='.$idReq.'">'.$reqDescripcion.'</a>';
+}
+
+//Menu de Pagina Entrevistas
+function menuEntrevistas($proyecto,$descripcion,$idEn){
+	echo '<a href="paginaGrupo.php">'.$_SESSION['grupo'].'</a>';
+	echo ' / ';
+	echo '<a href="paginaProyecto.php?proyecto='.$proyecto.'">'.$proyecto.'</a>';
+	echo ' / ';
+	echo '<a href="paginaEntrevista.php?id='.$idEn.'">'.$descripcion.'</a>';
+}
 //--------Cargar Cosas--------
 
 function cargarGrupo($usuario,$contra,$grupo){

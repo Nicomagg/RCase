@@ -24,14 +24,6 @@ if(isset($_POST['loginGrupo'])){
 	}
 }
 
-//Validamos la entrada al grupo en caso que estee
-//Accediendo a la pagina de onda...
-if(!isset($_SESSION['grupo'])){
-    echo '<script language = javascript>
-    alert("No tienes permiso para ver esta pagina");
-    self.location = "index.html"</script>';
-}
-
 //echo $_POST['usuario'];
 /*
 //$mal = false;
@@ -152,5 +144,12 @@ if(isset($_POST['altaGrupo'])) {
 	}
 }
 
+//Validamos la entrada al grupo en caso que estee
+//Accediendo a la pagina de onda...
+if(!isset($_SESSION['grupo'])){
+    echo '<script language = javascript>
+    alert("No tienes permiso para ver esta pagina");
+    self.location = "index.html"</script>';
+}
 
 ?>
