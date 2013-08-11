@@ -103,6 +103,14 @@ function verIdGrupo(){
 }
 
 function verIdProyecto($proyecto){
+	//Primero nos fijamos que el proyecto sea del grupo
+	$result = traerUno("SELECT count(*)".
+	" FROM `proyectos` ".
+	" WHERE nombreProyecto = '".$proyecto."'".
+	" AND idG = ".verIdGrupo());
+	if($result == 0) return -1;
+
+	//Ok seguimos con el id
 	$result = ejecutar("SELECT idP".
 	" FROM `proyectos` ".
 	" WHERE nombreProyecto = '".$proyecto."'".
@@ -241,8 +249,9 @@ function cargarProyecto($nombreP,$nombreC,$telefono){
 }
 
 function cargarRequerimiento($descripcion,$proyecto){
-	//Tomamos el id del proyecto
+	//Tomamos el id del proyecto, siempre que exista
 	$idP = verIdProyecto($proyecto);
+	if($idP == -1) -1;
 	try {
 		//Nos aseguramos que
 		//no haya un requerimiento con el mismo nombre
@@ -291,6 +300,37 @@ function cargarRequisito($nombre,$descripcion,
 			$descripcion."','".$entrada."','".
 			$salida."','".$prioridad."','".
 			$estado."',".$requerimiento.")";
+		ejecutar($consulta);
+	} catch (Exception $e) {
+		echo $e;
+		return -1;
+	}
+	return $id;
+}
+
+
+function cargarEntrevista($descripcion,$proyecto){
+	//Tomamos el id del proyecto, siempre que exista
+	$idP = verIdProyecto($proyecto);
+	if($idP == -1) -1;
+	try {
+		//Nos aseguramos que
+		//no haya una entrevista con el mismo nombre
+		$result = ejecutar("SELECT count(*) ".
+			"FROM entrevistas ".
+			"WHERE idP = ".$idP." AND descripcion = '".$descripcion."'");
+		$cant = mysqli_fetch_array($result);
+		if($cant[0] > 0) return -2;
+
+		//Tomamos el ID para asignarle
+		$id = proximoId("entrevistas","idEn");
+
+		//Tomamos la fecha actual
+		$fecha = date("Y-m-d");
+
+		//Cargamos una nueva entrevista
+		$consulta = "insert into entrevistas ".
+		"values(".$id.",'".$descripcion."','".$fecha."',".$idP.")";
 		ejecutar($consulta);
 	} catch (Exception $e) {
 		echo $e;

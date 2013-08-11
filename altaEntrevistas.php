@@ -1,3 +1,5 @@
+<?php include ('validarEncabezado.php'); ?>
+
 <!DOCTYPE html>
 <html class="no-js">
     <head>
@@ -30,7 +32,31 @@
                 <div class="form-group">
                     <label for="inputDescripcion" class="col-lg-offset-2 col-lg-2 control-label">Descripcion</label>
                     <div class="col-lg-4">
-                        <input type="text" name="Descripcion" class="form-control" id="inputDescripcion" placeholder="Usuario">
+                        <input type="text" name="Descripcion" class="form-control" id="inputDescripcion" placeholder="Descripcion">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputProyecto" class="col-lg-offset-2 col-lg-2 control-label">Proyecto</label>
+                    <div class="col-lg-4">
+                        <select name="Proyecto">
+                            <?php 
+                            $result = traerProyectos();
+                            if($result){
+                                while ($cosas = mysqli_fetch_array($result)) {
+                                    //Si se paso un proyecto por parametro
+                                    //lo seleccionamos por defecto
+                                    if(isset($_GET['proyecto']) && 
+                                        $_GET['proyecto'] == $cosas['nombreProyecto'])
+                                        echo '<option value="'.$cosas['nombreProyecto'].
+                                        '" selected>'.$cosas['nombreProyecto'].'</option>';    
+                                    else
+                                        echo '<option value="'.$cosas['nombreProyecto'].
+                                        '">'.$cosas['nombreProyecto'].'</option>';
+                                }
+                            }
+                            //<option value="Cosas" selected>Cosas</option>'
+                            ?>
+                        </select> 
                     </div>
                 </div>
                 <div class="form-group">

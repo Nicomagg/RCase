@@ -55,6 +55,9 @@
          <?php echo '<a href="altaRequerimientos.php?proyecto='.$_GET["proyecto"].'">';?>
             <button type="button" class="btn btn-info" onClick="self.location = altaRequerimientos.php">
                 Nuevo Requerimiento</button></a>
+        <?php echo '<a href="altaEntrevistas.php?proyecto='.$_GET["proyecto"].'">';?>
+            <button type="button" class="btn btn-info" onClick="self.location = altaEntrevistas.php">
+                Nueva Entrevista</button></a>
         
             
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>

@@ -47,7 +47,25 @@ if(!isset($_POST['grupo'])){
 	echo 'la variable grupo no entro';
 	$mal = true;
 }*/
+if(isset($_POST['altaEntrevistas'])) {
+	$result = cargarEntrevista($_POST['Descripcion'],$_POST['Proyecto']);
+	if($result >  0){
+		echo '<script language = javascript>
+		alert("entrevista cargada correctamente al proyecto");
+		self.location = "paginaEntrevista.php?id='.$result.'"</script>';
+	}
+	else if($result == -1){
+		echo '<script language = javascript>
+		alert("no se pudo cargar la entrevista");
+		self.location = "paginaProyecto.php?proyecto='.$_POST['Proyecto'].'"</script>';
+	}
+	else if($result == -2){
+		mensajeRedir("Ya hay cargado una entrevista ".
+			"con el mismo nombre para ese proyecto",
+			"paginaProyecto.php?proyecto=".$_POST['Proyecto']);
 
+	}
+}
 if(isset($_POST['altaRequisito'])) {
 	$result = cargarRequisito($_POST['Nombre'],$_POST['Descripcion'],
 		$_POST['Entradas'],$_POST['Salidas'],
@@ -72,7 +90,7 @@ if(isset($_POST['altaRequerimiento'])) {
 	$result = cargarRequerimiento($_POST['descripcion'],$_POST['Proyecto']);
 	if($result >  0){
 		echo '<script language = javascript>
-		alert("requerimiento cargado correctamente al grupo");
+		alert("requerimiento cargado correctamente al proyecto");
 		self.location = "paginaRequerimientos.php?id='.$result.'&descripcion='.$_POST['descripcion'].'"</script>';
 	}
 	else if($result == -1){
