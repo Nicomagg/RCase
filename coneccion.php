@@ -161,6 +161,7 @@ function proximoId($tabla,$campo){
 }
 
 //--------Menu de Cosas--------
+
 //Menu de Pagina Grupo
 function menuGrupo(){
 	echo '<a href="paginaGrupo.php">'.$_SESSION['grupo'].'</a>';
@@ -198,6 +199,7 @@ function menuEntrevistas($proyecto,$descripcion,$idEn){
 	echo ' / ';
 	echo '<a href="paginaEntrevista.php?id='.$idEn.'">'.$descripcion.'</a>';
 }
+
 //--------Cargar Cosas--------
 
 function cargarGrupo($usuario,$contra,$grupo){
@@ -390,6 +392,76 @@ function cargarEntrevista($descripcion,$proyecto){
 		return -1;
 	}
 	return $id;
+}
+
+//---------Validar Entrada de Cosas--------
+
+function hayCodigoInyectado($texto){
+	$texto = strtolower($texto);
+	//SQL Inyection
+	$lista[0] = 'union';
+	$lista[1] = 'select';
+	$lista[2] = 'insert';
+	$lista[3] = 'delete';
+	$lista[4] = 'drop';
+	$lista[5] = 'update';
+	$lista[6] = ';';
+	$lista[7] = "\'";
+	$lista[8] = '\"';
+	$lista[9] = '*';
+	$lista[10] = ')';
+	$lista[11] = '(';
+	$lista[12] = 'table';
+	$lista[13] = 'schema';
+	$lista[14] = '%';
+	$lista[15] = '=';
+	$lista[16] = 'like';
+	$lista[17] = '--';
+	//Cross Site Scripting
+	$lista[18] = 'script';
+	//Cross Site Styling
+	$lista[19] = 'style';
+
+	for($i = 0; $i < 20; $i = $i +1 )
+		if (strpos($texto, $lista[$i]) !== false) banear();
+}
+
+function obtenerIP(){
+   if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"),"unknown"))
+           $ip = getenv("HTTP_CLIENT_IP");
+   else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+           $ip = getenv("HTTP_X_FORWARDED_FOR");
+   else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+           $ip = getenv("REMOTE_ADDR");
+   else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+           $ip = $_SERVER['REMOTE_ADDR'];
+   else
+           $ip = "IP desconocida";
+   return($ip);
+}
+
+function banear(){
+	//Tomamos el ID para asignarle
+	$id = proximoId("baneados","idBan");
+	//Tomamos el IP
+	$ip = obtenerIP();
+	//Tomamos la fecha actual
+	$fecha = date("Y-m-d");
+ 	$consulta = "insert into baneados values(".$id.",'".$ip."','".$fecha."')";
+ 	echo $consulta;
+	ejecutar($consulta);
+	session_destroy();
+	header('Location: 403_propio.html');
+}
+
+//-------Pateando Gente---------
+
+$ip = obtenerIP();
+if(traerUno("select count(*)".
+	" from baneados".
+	" where IP = '".$ip."'") > 0){
+	session_destroy();
+	header('Location: 403_propio.html');
 }
 
 ?>

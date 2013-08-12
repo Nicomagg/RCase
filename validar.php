@@ -24,22 +24,16 @@ if(isset($_POST['loginGrupo'])){
 	}
 }
 
-//echo $_POST['usuario'];
-/*
-//$mal = false;
-if(!isset($_POST['loginGrupo'])){
-	echo 'la variable loginGrupo no entro';
-	//$mal = true;
+function validarCampo($texto){
+	if(!isset($_POST[$texto])) return false;
+	if(trim($_POST[$texto]) == '') return false;
+	return true;
 }
-if(!isset($_POST['pass'])){
-	echo 'la variable pass no entro';
-	$mal = true; 
-}
-if(!isset($_POST['grupo'])){
-	echo 'la variable grupo no entro';
-	$mal = true;
-}*/
+
 if(isset($_POST['altaEntrevistas'])) {
+	hayCodigoInyectado($_POST['Descripcion']);
+	hayCodigoInyectado($_POST['Proyecto']);
+
 	$result = cargarEntrevista($_POST['Descripcion'],$_POST['Proyecto']);
 	if($result >  0){
 		echo '<script language = javascript>
@@ -55,7 +49,6 @@ if(isset($_POST['altaEntrevistas'])) {
 		mensajeRedir("Ya hay cargado una entrevista ".
 			"con el mismo nombre para ese proyecto",
 			"paginaProyecto.php?proyecto=".$_POST['Proyecto']);
-
 	}
 }
 if(isset($_POST['altaRequisito'])) {
@@ -129,6 +122,8 @@ if(isset($_POST['altaPersona'])) {
 	}
 }
 if(isset($_POST['altaGrupo'])) {
+	if(!validarCampo('usuario') || !validarCampo('pass') || !validarCampo('grupo')) 
+		mensajeRedir("Hay campos Invalidos", "index.php");
 	$result = cargarGrupo($_POST['usuario'],$_POST['pass'],$_POST['grupo']);
 	$_SESSION['grupo'] = $_POST['grupo'];
 	if($result){

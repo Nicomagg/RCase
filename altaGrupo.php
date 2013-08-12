@@ -1,8 +1,7 @@
+<?php include('coneccion.php'); ?>
+
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,9 +15,6 @@
         <script></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
         <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
             <div class="container" id="header">
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -30,13 +26,37 @@
                  <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
             </div>
         </div>
-        <div id='container'>
-        </div>
 
+		<div class='row' id='log'>
+			<form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php">
+				<div class="form-group">
+					<label for="inputUsuario" class="col-lg-offset-2 col-lg-2 control-label">Usuario</label>
+					<div class="col-lg-4">
+						<input type="text" name="usuario" class="form-control" id="inputUsuario" placeholder="Usuario">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputGrupo" class="col-lg-offset-2 col-lg-2 control-label">Grupo</label>
+					<div class="col-lg-4">
+						<input type="text" name="grupo" class="form-control" id="inputGrupo" placeholder="Grupo">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword" class="col-lg-offset-2 col-lg-2 control-label">Password</label>
+					<div class="col-lg-4">
+						<input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
+						<button type="submit" name="altaGrupo" class="btn btn-default" onClick="validar.php;">Sign Up</button>
+					</div>
+				</div>
+			</form>
+		</div>
         
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>

@@ -21,7 +21,7 @@ echo '<h2>'.
 '<br>'.
 'Para desloguearse, te ten&eacute;s que haber logueado primero.'.'<br>'.
 '-Grupo Loading...<br><br><br><br></h2>';
-echo '<a href="index.html">Volver a Casa</a>';
+echo '<a href="index.php">Volver a Casa</a>';
 
 }
 ?>
