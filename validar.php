@@ -12,12 +12,12 @@ function validarCampo($texto){
 }
 
 if(isset($_POST['loginGrupo'])){
+	if(!validarCampo('usuario') || !validarCampo('pass') || !validarCampo('grupo'))
+		mensajeRedir("Hay campos Invalidos", "index.php");
+	
 	hayCodigoInyectado($_POST['usuario']);
 	hayCodigoInyectado($_POST['pass']);
 	hayCodigoInyectado($_POST['grupo']);
-
-	if(!validarCampo('usuario') || !validarCampo('pass') || !validarCampo('grupo'))
-		mensajeRedir("Hay campos Invalidos", "index.php");
 
 	if(validarLogin($_POST['usuario'],$_POST['pass'],$_POST['grupo'])){
 		$_SESSION['grupo'] = $_POST['grupo'];
@@ -29,17 +29,17 @@ if(isset($_POST['loginGrupo'])){
 	}else{
 		echo '<script language = javascript>
 			alert("Parece que te equivocaste en algo");
-			self.location = "index.html"
+			self.location = "index.php"
 			</script>';
 	}
 }
 
 if(isset($_POST['altaEntrevistas'])) {
+	if(!validarCampo('Descripcion') || !validarCampo('Proyecto'))
+		mensajeRedir("Hay campos Invalidos", "index.php");
+		
 	hayCodigoInyectado($_POST['Descripcion']);
 	hayCodigoInyectado($_POST['Proyecto']);
-
-if(!validarCampo('Descripcion') || !validarCampo('Proyecto'))
-	mensajeRedir("Hay campos Invalidos", "index.php");
 
 	$result = cargarEntrevista($_POST['Descripcion'],$_POST['Proyecto']);
 	if($result >  0){
@@ -59,6 +59,12 @@ if(!validarCampo('Descripcion') || !validarCampo('Proyecto'))
 	}
 }
 if(isset($_POST['altaRequisito'])) {
+	
+	if(!validarCampo('Nombre') || !validarCampo('Prioridad') ||
+	 !validarCampo('Descripcion')  || !validarCampo('Entradas')  ||
+	 !validarCampo('Salidas')  || !validarCampo('Estado') || !validarCampo('idR')) 
+		mensajeRedir("Hay campos Invalidos", "index.php");
+
 	hayCodigoInyectado($_POST['Nombre']);
 	hayCodigoInyectado($_POST['Descripcion']);
 	hayCodigoInyectado($_POST['Entradas']);
@@ -66,11 +72,6 @@ if(isset($_POST['altaRequisito'])) {
 	hayCodigoInyectado($_POST['Estado']);
 	hayCodigoInyectado($_POST['Prioridad']);
 	hayCodigoInyectado($_POST['idR']);
-
-if(!validarCampo('Nombre') || !validarCampo('Prioridad') ||
-	 !validarCampo('Descripcion')  || !validarCampo('Entradas')  ||
-	 !validarCampo('Salidas')  || !validarCampo('Estado') || !validarCampo('idR')) 
-		mensajeRedir("Hay campos Invalidos", "index.php");
 
 	$result = cargarRequisito($_POST['Nombre'],$_POST['Descripcion'],
 		$_POST['Entradas'],$_POST['Salidas'],
@@ -92,11 +93,11 @@ if(!validarCampo('Nombre') || !validarCampo('Prioridad') ||
             "que no pertenece a un requerimiento de este grupo","paginaGrupo.php");
 }
 if(isset($_POST['altaRequerimiento'])) {
-	hayCodigoInyectado($_POST['descripcion']);
-	hayCodigoInyectado($_POST['Proyecto']);
-
 	if(!validarCampo('descripcion') || !validarCampo('Proyecto')) 
 		mensajeRedir("Hay campos Invalidos", "index.php");
+		
+	hayCodigoInyectado($_POST['descripcion']);
+	hayCodigoInyectado($_POST['Proyecto']);
 
 	$result = cargarRequerimiento($_POST['descripcion'],$_POST['Proyecto']);
 	if($result >  0){
@@ -117,12 +118,12 @@ if(isset($_POST['altaRequerimiento'])) {
 	}
 }
 if(isset($_POST['altaProyecto'])) {
+	if(!validarCampo('nombreProyecto') || !validarCampo('nombreCliente') || !validarCampo('telefono')) 
+		mensajeRedir("Hay campos Invalidos", "index.php");
+
 	hayCodigoInyectado($_POST['nombreProyecto']);
 	hayCodigoInyectado($_POST['nombreCliente']);
 	hayCodigoInyectado($_POST['telefono']);
-
-	if(!validarCampo('nombreProyecto') || !validarCampo('nombreCliente') || !validarCampo('telefono')) 
-		mensajeRedir("Hay campos Invalidos", "index.php");
 
 	$result = cargarProyecto($_POST['nombreProyecto'],$_POST['nombreCliente'],$_POST['telefono']);
 	if($result == 0){
@@ -142,12 +143,12 @@ if(isset($_POST['altaProyecto'])) {
 	}
 }
 if(isset($_POST['altaPersona'])) {
+	if(!validarCampo('nombre') || !validarCampo('apellido') || !validarCampo('dni')) 
+		mensajeRedir("Hay campos Invalidos", "index.php");
+
 	hayCodigoInyectado($_POST['nombre']);
 	hayCodigoInyectado($_POST['apellido']);
 	hayCodigoInyectado($_POST['dni']);
-
-	if(!validarCampo('nombre') || !validarCampo('apellido') || !validarCampo('dni')) 
-		mensajeRedir("Hay campos Invalidos", "index.php");
 
 	$result = cargarPersona($_POST['nombre'],$_POST['apellido'],$_POST['dni']);
 	if($result){
@@ -162,13 +163,13 @@ if(isset($_POST['altaPersona'])) {
 	}
 }
 if(isset($_POST['altaGrupo'])) {
-	hayCodigoInyectado($_POST['usuario']);
-	hayCodigoInyectado($_POST['pass']);
-	hayCodigoInyectado($_POST['grupo']);
-
 	if(!validarCampo('usuario') || !validarCampo('pass') || !validarCampo('grupo')) 
 		mensajeRedir("Hay campos Invalidos", "index.php");
 
+	hayCodigoInyectado($_POST['usuario']);
+	hayCodigoInyectado($_POST['pass']);
+	hayCodigoInyectado($_POST['grupo']);
+	
 	$result = cargarGrupo($_POST['usuario'],$_POST['pass'],$_POST['grupo']);
 	$_SESSION['grupo'] = $_POST['grupo'];
 	if($result){
@@ -189,7 +190,7 @@ if(isset($_POST['altaGrupo'])) {
 if(!isset($_SESSION['grupo'])){
     echo '<script language = javascript>
     alert("No tienes permiso para ver esta pagina");
-    self.location = "index.html"</script>';
+    self.location = "index.php"</script>';
 }
 
 ?>
