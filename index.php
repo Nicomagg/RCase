@@ -30,9 +30,35 @@
             </div>
         </div>
         <div id='container'>
+            <div class='row' id='log'>
+                <form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php" >
+                    <div class="form-group">
+                        <label for="inputUsuario" class="col-lg-offset-2 col-lg-2 control-label">Usuario</label>
+                        <div class="col-lg-4">
+                            <input type="text" name="usuario" class="form-control" id="inputUsuario" placeholder="Usuario">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputGrupo" class="col-lg-offset-2 col-lg-2 control-label">Grupo</label>
+                        <div class="col-lg-4">
+                            <input type="text" name="grupo" class="form-control" id="inputGrupo" placeholder="Grupo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-lg-offset-2 col-lg-2 control-label">Password</label>
+                        <div class="col-lg-4">
+                            <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
+                            <button name="loginGrupo" type="submit" class="btn btn-primary" onClick="validar.php">Sign in</button>
+                            <button class="btn btn-default">Sign Up</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
