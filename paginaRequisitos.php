@@ -1,6 +1,6 @@
 <?php
-//Validamos que entre un id de requerimiento
 include ('barrita.php');
+//Validamos que entre un id de requerimiento
 if(!isset($_GET['id']))
     mensajeRedir("debes elegir un requisito","paginaGrupo.php");
 $result = validarIdRequisito($_GET['id']);

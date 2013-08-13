@@ -1,4 +1,3 @@
-<?php include ('barrita.php'); ?>
 <!DOCTYPE html>
 <html class="no-js">
     <head>
@@ -14,8 +13,9 @@
         <script></script>
     </head>
     <body>
+    <?php include ('barrita.php'); ?>
         <div class='container'>
-            <h1>Nuevo proyecto</h1>
+            <h1 style='font-weight:bolder;' >Nuevo proyecto</h1>
             <hr>
             <div class='row' id='log'>
                 <form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php" name="altaProyecto">
@@ -37,8 +37,10 @@
                             <input type="text" name="telefono" class="form-control" id="inputPassword" placeholder="Password">
                         </div>
                     </div>
+                    <hr>
                     <div class="form-group">
                         <div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
+                            <button id='atras' class="btn btn-default" >Atr&aacute;s</button>
                             <button typea="submit" class="btn btn-primary" onClick="validar.php;" name="altaProyecto">Nuevo</button>
                         </div>
                     </div>
@@ -49,5 +51,13 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#atras').click(function(e) {
+                    e.preventDefault()
+                    window.history.back()
+                })
+            })
+        </script>
     </body>
 </html>

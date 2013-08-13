@@ -1,4 +1,5 @@
-<?php  include ('barrita.php');
+<?php
+include ('barrita.php');
 
 //Validamos que entre un id de requerimiento
 if(!isset($_GET['id']))

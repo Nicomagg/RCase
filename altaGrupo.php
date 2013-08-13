@@ -1,4 +1,3 @@
-<?php include('coneccion.php'); ?>
 
 <!DOCTYPE html>
 <html class="no-js">
@@ -15,6 +14,7 @@
         <script></script>
     </head>
     <body>
+		<?php include('coneccion.php'); ?>
 		<div class='row' id='log'>
 			<form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php">
 				<div class="form-group">
@@ -35,6 +35,7 @@
 						<input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password">
 					</div>
 				</div>
+				<hr>
 				<div class="form-group">
 					<div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
 						<button type="submit" name="altaGrupo" class="btn btn-primary" onClick="validar.php;">Sign Up</button>

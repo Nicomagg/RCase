@@ -1,4 +1,3 @@
-<?php include ('barrita.php'); ?>
 
 <!DOCTYPE html>
 <html class="no-js">
@@ -15,48 +14,50 @@
         <script></script>
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
-            <div class="container" id="header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <label class='navbar-brand'>RCase</label>
-                 <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
-            </div>
-        </div>
-
-		<div class='row' id='log'>
-			<form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php" >
-				<div class="form-group">
-					<label for="inputUsuario" class="col-lg-offset-2 col-lg-2 control-label">Nombre</label>
-					<div class="col-lg-4">
-						<input type="text" name="nombre" class="form-control" id="inputUsuario" placeholder="Usuario">
+		<?php include ('barrita.php'); ?>
+    	<div class='container'>
+			<h1 style='font-weight:bolder;' >Nueva persona</h1>
+			<hr>
+			<div class='row' id='log'>
+				<form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php" >
+					<div class="form-group">
+						<label for="inputUsuario" class="col-lg-offset-2 col-lg-2 control-label">Nombre</label>
+						<div class="col-lg-4">
+							<input type="text" name="nombre" class="form-control" id="inputUsuario" placeholder="Usuario">
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputGrupo" class="col-lg-offset-2 col-lg-2 control-label">Apellido</label>
-					<div class="col-lg-4">
-						<input type="text" name="apellido" class="form-control" id="inputGrupo" placeholder="Grupo">
+					<div class="form-group">
+						<label for="inputGrupo" class="col-lg-offset-2 col-lg-2 control-label">Apellido</label>
+						<div class="col-lg-4">
+							<input type="text" name="apellido" class="form-control" id="inputGrupo" placeholder="Grupo">
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputPassword" class="col-lg-offset-2 col-lg-2 control-label">DNI</label>
-					<div class="col-lg-4">
-						<input type="text" name="dni" class="form-control" id="inputPassword" placeholder="Password">
+					<div class="form-group">
+						<label for="inputPassword" class="col-lg-offset-2 col-lg-2 control-label">DNI</label>
+						<div class="col-lg-4">
+							<input type="text" name="dni" class="form-control" id="inputPassword" placeholder="Password">
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
-						<button typea="submit" class="btn btn-default" onClick="validar.php;" name="altaPersona">Sign Up</button>
+					<hr>
+					<div class="form-group">
+						<div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
+							<button id='atras' class="btn btn-default" >Atr&aacute;s</button>
+							<button typea="submit" class="btn btn-primary" onClick="validar.php;" name="altaPersona">Sign Up</button>
+						</div>
 					</div>
-				</div>
-			</form>
-		</div>
-        
+				</form>
+			</div>
+    	</div>
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#atras').click(function(e) {
+                    e.preventDefault()
+                    window.history.back()
+                })
+            })
+        </script>
     </body>
 </html>

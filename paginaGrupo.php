@@ -1,4 +1,3 @@
-<?php include ('barrita.php'); ?>
 <!DOCTYPE html>
 <html class="no-js">
     <head>
@@ -15,6 +14,7 @@
         <script></script>
     </head>
     <body>
+        <?php include ('barrita.php'); ?>
         <div class="container">
             <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
                 <div class="container" id="header">
@@ -33,12 +33,11 @@
             <div id="centradoPrimero" class="row">
                 <div class="col-lg-9">
                     <table class="table table-striped">
-                        <caption>Proyectos del Grupo</caption>
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Cliente</th>
-                                <th>Teléfono</th>
+                                <th>Tel&eacute;fono</th>
                             </tr>
                         </thead>
                         <?php 

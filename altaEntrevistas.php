@@ -1,5 +1,3 @@
-<?php include ('barrita.php'); ?>
-
 <!DOCTYPE html>
 <html class="no-js">
     <head>
@@ -15,60 +13,62 @@
         <script></script>
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
-            <div class="container" id="header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <label class='navbar-brand'>RCase</label>
-                 <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
-            </div>
-        </div>
-
-        <div class='row' id='log'>
-            <form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php" name="altaEntrevistas">
-                <div class="form-group">
-                    <label for="inputDescripcion" class="col-lg-offset-2 col-lg-2 control-label">Descripcion</label>
-                    <div class="col-lg-4">
-                        <input type="text" name="Descripcion" class="form-control" id="inputDescripcion" placeholder="Descripcion">
+        <?php include ('barrita.php'); ?>
+        <div class='container'>
+            <h1 style='font-weight:bolder;' >Nueva entrevista</h1>
+            <hr>
+            <div class='row' id='log'>
+                <form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php" name="altaEntrevistas">
+                    <div class="form-group">
+                        <label for="inputDescripcion" class="col-lg-offset-2 col-lg-2 control-label">Descripcion</label>
+                        <div class="col-lg-4">
+                            <input type="text" name="Descripcion" class="form-control" id="inputDescripcion" placeholder="Descripcion">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputProyecto" class="col-lg-offset-2 col-lg-2 control-label">Proyecto</label>
-                    <div class="col-lg-4">
-                        <select name="Proyecto">
-                            <?php 
-                            $result = traerProyectos();
-                            if($result){
-                                while ($cosas = mysqli_fetch_array($result)) {
-                                    //Si se paso un proyecto por parametro
-                                    //lo seleccionamos por defecto
-                                    if(isset($_GET['proyecto']) && 
-                                        $_GET['proyecto'] == $cosas['nombreProyecto'])
-                                        echo '<option value="'.$cosas['nombreProyecto'].
-                                        '" selected>'.$cosas['nombreProyecto'].'</option>';    
-                                    else
-                                        echo '<option value="'.$cosas['nombreProyecto'].
-                                        '">'.$cosas['nombreProyecto'].'</option>';
+                    <div class="form-group">
+                        <label for="inputProyecto" class="col-lg-offset-2 col-lg-2 control-label">Proyecto</label>
+                        <div class="col-lg-4">
+                            <select name="Proyecto" class='form-control'>
+                                <?php 
+                                $result = traerProyectos();
+                                if($result){
+                                    while ($cosas = mysqli_fetch_array($result)) {
+                                        //Si se paso un proyecto por parametro
+                                        //lo seleccionamos por defecto
+                                        if(isset($_GET['proyecto']) && 
+                                            $_GET['proyecto'] == $cosas['nombreProyecto'])
+                                            echo '<option value="'.$cosas['nombreProyecto'].
+                                            '" selected>'.$cosas['nombreProyecto'].'</option>';    
+                                        else
+                                            echo '<option value="'.$cosas['nombreProyecto'].
+                                            '">'.$cosas['nombreProyecto'].'</option>';
+                                    }
                                 }
-                            }
-                            //<option value="Cosas" selected>Cosas</option>'
-                            ?>
-                        </select> 
+                                ?>
+                            </select> 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
-                        <button typea="submit" class="btn btn-default" onClick="validar.php;" name="altaEntrevistas">Sign Up</button>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
+                            <button id='atras' class="btn btn-default" >Atr&aacute;s</button>
+                            <button typea="submit" class="btn btn-primary" onClick="validar.php;" name="altaEntrevistas">Sign Up</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
         
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#atras').click(function(e) {
+                    e.preventDefault()
+                    window.history.back()
+                })
+            })
+        </script>
     </body>
 </html>

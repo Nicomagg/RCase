@@ -1,6 +1,5 @@
 <?php 
     include ('barrita.php');
-
     //Si no pone el nombre del proyecto...
     if(!isset($_GET['proyecto'])){
         echo '<script language = javascript>

@@ -116,9 +116,11 @@
 </style>
 <div id='enc'>
 	<div id='izq'>
+		<a href="paginaGrupo.php">
 		<h3 class="normal"><?php echo $_SESSION['grupo']; ?> 
 			<span class="forma"></span>
 		</h3>
+		</a>
 		<a href="desconectar.php">
 			<h3 class="sin-bordes">Salir 
 				<span class="forma"></span>
