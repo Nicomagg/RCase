@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>RCase</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -18,17 +18,6 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-        <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
-            <div class="container" id="header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <label class='navbar-brand'>RCase</label>
-                 <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
-            </div>
-        </div>
         <div id='container'>
             <div class='row' id='log'>
                 <form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php" >
@@ -53,7 +42,7 @@
                     <div class="form-group">
                         <div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
                             <button name="loginGrupo" type="submit" class="btn btn-primary" onClick="validar.php">Sign in</button>
-                            <button class="btn btn-default">Sign Up</button>
+                            <button id='signup' class="btn btn-default">Sign Up</button>
                         </div>
                     </div>
                 </form>
@@ -62,6 +51,17 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#container').css('margin-top',(window.innerHeight - $('#container').height())/2)
+                $(window).resize(function() {
+                    $('#container').css('margin-top',(window.innerHeight - $('#container').height())/2)
+                })
+                $('#signup').click(function(e) {
+                    e.preventDefault()
+                    document.location='altaGrupo.php'
+                })
+            })
+        </script>
     </body>
 </html>

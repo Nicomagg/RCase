@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Sign Up - RCase</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -15,18 +15,6 @@
         <script></script>
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
-            <div class="container" id="header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <label class='navbar-brand'>RCase</label>
-                 <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
-            </div>
-        </div>
-
 		<div class='row' id='log'>
 			<form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php">
 				<div class="form-group">
@@ -49,7 +37,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
-						<button type="submit" name="altaGrupo" class="btn btn-default" onClick="validar.php;">Sign Up</button>
+						<button type="submit" name="altaGrupo" class="btn btn-primary" onClick="validar.php;">Sign Up</button>
 					</div>
 				</div>
 			</form>
@@ -58,5 +46,13 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.row').css('margin-top',(window.innerHeight - $('.row').height())/2)
+                $(window).resize(function() {
+                    $('.row').css('margin-top',(window.innerHeight - $('.row').height())/2)
+                })
+            })
+        </script>
     </body>
 </html>

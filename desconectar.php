@@ -8,7 +8,7 @@ if(isset($_SESSION['grupo']))
 	session_destroy();
 	echo '<script language = javascript>
 		alert("su sesion ha terminado correctamente")
-		self.location = "index.html"
+		self.location = "index.php"
 		</script>';
 }
 else {
