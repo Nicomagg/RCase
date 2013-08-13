@@ -43,46 +43,33 @@ $proyecto = traerUno("select nombreProyecto from `proyectos` ".
         <script type="text/javascript" src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        <br><?php menuEntrevistas($proyecto,$descripcion,$_GET['id']); ?><br>
-        <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
-            <div class="container" id="header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <label class='navbar-brand'>RCase</label>
-                <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
+        <div class="container">
+            <h3 id="tituloPrincipal">Entrevista</h3>
+            <hr>
+            <div class="col-lg-6 col-lg-offset-3">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <?php 
+                    $result = ejecutar("SELECT * FROM `entrevistas` WHERE idEn = ".$_GET['id']);
+                    if($result){
+                        echo '<tbody>';
+                        while ($cosas = mysqli_fetch_array($result)) {
+                            echo '<tr>';
+                                echo '<td>'.$cosas['descripcion'].'</td>';
+                                echo '<td>'.$cosas['fecha'].'</td>';
+                            echo '</tr>';
+                        }
+                        echo '</tbody>';
+                    }
+                    ?>
+                </table> 
             </div>
         </div>
-
-        <h3>Entrevista</h3><br><br>
-        <div class="col-lg-6 col-lg-offset-3">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Descripcion</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <?php 
-                $result = ejecutar("SELECT * FROM `entrevistas` WHERE idEn = ".$_GET['id']);
-                if($result){
-                    echo '<tbody>';
-                    while ($cosas = mysqli_fetch_array($result)) {
-                        echo '<tr>';
-                            echo '<td>'.$cosas['descripcion'].'</td>';
-                            echo '<td>'.$cosas['fecha'].'</td>';
-                        echo '</tr>';
-                    }
-                    echo '</tbody>';
-                }
-                ?>
-            </table> 
-        </div>
-        <br>
-        <br>
-        <br>
 
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>

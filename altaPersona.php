@@ -43,7 +43,7 @@
 					<div class="form-group">
 						<div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
 							<button id='atras' class="btn btn-default" >Atr&aacute;s</button>
-							<button typea="submit" class="btn btn-primary" onClick="validar.php;" name="altaPersona">Sign Up</button>
+							<button typea="submit" class="btn btn-primary" onClick="validar.php;" name="altaPersona">Guardar</button>
 						</div>
 					</div>
 				</form>

@@ -72,6 +72,12 @@ td{
 	text-indent: 50px;
 }
 
+#buttonAltaProyecto, #buttonAltaPersona{
+	background-color: white;
+	color: black;
+	border: 1px solid;
+}
+
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */

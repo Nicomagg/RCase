@@ -32,100 +32,116 @@
         <script></script>
     </head>
     <body>
-        <br><?php menuProyecto($_GET['proyecto']); ?><br>
-        <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
-            <div class="container" id="header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <label class='navbar-brand'>RCase</label>
-                <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
+        <div class="container">    
+            <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
+                <div class="container" id="header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <label class='navbar-brand'>RCase</label>
+                    <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
+                </div>
             </div>
-        </div>
-        <h3>Requerimientos</h3><br><br>
-        <div class="col-lg-6 col-lg-offset-3">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Descripcion</th>
-                    </tr>
-                </thead>
-                <?php 
-                $result = traerRequerimientos($_GET['proyecto']);
-                if($result){
-                    echo '<tbody>';
-                    while ($cosas = mysqli_fetch_array($result)) {
-                        echo '<tr>';
-                            echo '<td>';
-                                echo '<a href="paginaRequerimientos.php?id='.$cosas['idR'].'&descrip='.$cosas['descripcion'].'">';
-                                echo $cosas['idR'];
-                                echo '</a>';
-                            echo '</td>';
-                            echo '<td>'.$cosas['descripcion'].'</td>';
-                        echo '</tr>';
-                        
-                    }
-                    echo '</tbody>';
-                }
-                ?>
-            </table> 
-        </div>
-        <br><br>
-        
-        <br><br>
-        <div class="form-group">
-            <div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
-                 <?php echo '<a href="altaRequerimientos.php?proyecto='.$_GET["proyecto"].'">';?>
-                    <button type="button" class="btn btn-info" onClick="self.location = altaRequerimientos.php">
-                        Nuevo Requerimiento</button></a>
-            </div>
-        </div>
-
-        <br><br>
-        <h3>Entrevistas</h3><br><br>
-        <div class="col-lg-6 col-lg-offset-3">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Descripcion</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <?php 
-                $result =  traerEntrevistas($_GET['proyecto']);
-                if($result){
-                    echo '<tbody>';
-                    while ($cosas = mysqli_fetch_array($result)) {
-                        echo '<tr>';
-                            echo '<td>';
-                                echo '<a href="paginaEntrevista.php?id='.$cosas['idEn'].'">';
-                                echo $cosas['idEn'];
-                                echo '</a>';
-                            echo '</td>';
-                            echo '<td>'.$cosas['descripcion'].'</td>';
-                            echo '<td>'.$cosas['fecha'].'</td>';
-                        echo '</tr>';
-                    }
-                    echo '</tbody>';
-                }
-                ?>
-            </table> 
-        </div>
-        <br><br>
-        <div class="form-group">
-            <div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
-                <?php echo '<a href="altaEntrevistas.php?proyecto='.$_GET["proyecto"].'">';?>
-                    <button type="button" class="btn btn-info" onClick="self.location = altaEntrevistas.php">
-                        Nueva Entrevista</button></a>
-            </div>
-        </div>
             
+                <h3 id="tituloPrincipal">Requerimientos</h3>
+                <hr>
+                <div id="centradoPrimero" class="row">
+                    <div class="col-lg-9">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Descripcion</th>
+                                </tr>
+                            </thead>
+                            <?php 
+                            $result = traerRequerimientos($_GET['proyecto']);
+                            if($result){
+                                echo '<tbody>';
+                                while ($cosas = mysqli_fetch_array($result)) {
+                                    echo '<tr>';
+                                        echo '<td>';
+                                            echo '<a href="paginaRequerimientos.php?id='.$cosas['idR'].'&descrip='.$cosas['descripcion'].'">';
+                                            echo $cosas['idR'];
+                                            echo '</a>';
+                                        echo '</td>';
+                                        echo '<td>'.$cosas['descripcion'].'</td>';
+                                    echo '</tr>';
+                                    
+                                }
+                                echo '</tbody>';
+                            }
+                            ?>
+                        </table> 
+                    </div>
+                    <div class="col-lg-3">
+                        <?php echo '<a href="altaRequerimientos.php?proyecto='.$_GET["proyecto"].'">';?>
+                            <button id="buttonAltaProyecto" type="button" class="btn btn-info" onClick="self.location = altaRequerimientos.php">
+                                Nuevo Requerimiento
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                
+                <hr>
+                <h3 id="subtitoPrincipal">Entrevistas</h3>
+                <hr>
+                <div id="centradoSegundo" class="row">
+                    <div class="col-lg-9">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Descripcion</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <?php 
+                            $result =  traerEntrevistas($_GET['proyecto']);
+                            if($result){
+                                echo '<tbody>';
+                                while ($cosas = mysqli_fetch_array($result)) {
+                                    echo '<tr>';
+                                        echo '<td>';
+                                            echo '<a href="paginaEntrevista.php?id='.$cosas['idEn'].'">';
+                                            echo $cosas['idEn'];
+                                            echo '</a>';
+                                        echo '</td>';
+                                        echo '<td>'.$cosas['descripcion'].'</td>';
+                                        echo '<td>'.$cosas['fecha'].'</td>';
+                                    echo '</tr>';
+                                }
+                                echo '</tbody>';
+                            }
+                            ?>
+                        </table> 
+                    </div>
+                    <div class="col-lg-3">
+                        <?php echo '<a href="altaEntrevistas.php?proyecto='.$_GET["proyecto"].'">';?>
+                            <button id="buttonAltaPersona" type="button" class="btn btn-info" onClick="self.location = altaEntrevistas.php">
+                                Nueva Entrevista
+                            </button>
+                        </a>
+                    </div> 
+                </div>
+            </div>    
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#buttonAltaProyecto").css("margin-top",($("#centradoPrimero").height()-$("#buttonAltaProyecto").height())/2);
+                $(window).resize(function(){
+                    $("#buttonAltaProyecto").css("margin-top",($("#centradoPrimero").height()-$("#buttonAltaProyecto").height())/2);
+                })
+
+                $("#buttonAltaPersona").css("margin-top",($("#centradoSegundo").height()-$("#buttonAltaPersona").height())/2);
+                $(window).resize(function(){
+                    $("#buttonAltaPersona").css("margin-top",($("#centradoSegundo").height()-$("#buttonAltaPersona").height())/2);
+                })
+            })
+        </script>
     </body>
 </html> 

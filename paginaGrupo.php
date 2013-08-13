@@ -65,8 +65,7 @@
                 <div class="col-lg-3">
                     <a href="altaProyecto.php">
                         <button id="buttonAltaProyecto" class="btn btn-default" onClick="self.location = altaProyecto.php">
-                            Cargar Un 
-                            Nuevo Proyecto
+                            Cargar Un Nuevo Proyecto
                         </button>
                     </a>
                 </div> 

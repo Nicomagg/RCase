@@ -39,6 +39,7 @@
 				<hr>
 				<div class="form-group">
 					<div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
+						<button id='atras' class="btn btn-default" >Atr&aacute;s</button>
 						<button type="submit" name="altaGrupo" class="btn btn-primary" onClick="validar.php;">Sign Up</button>
 					</div>
 				</div>
@@ -53,6 +54,10 @@
                 $('.row').css('margin-top',(window.innerHeight - $('.row').height())/2)
                 $(window).resize(function() {
                     $('.row').css('margin-top',(window.innerHeight - $('.row').height())/2)
+                })
+                $('#atras').click(function(e) {
+                    e.preventDefault()
+                    window.history.back()
                 })
             })
         </script>

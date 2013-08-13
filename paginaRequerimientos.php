@@ -44,67 +44,65 @@ $proyecto = traerUno("select nombreProyecto from `proyectos` ".
         <script type="text/javascript" src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        <br><?php menuRequerimiento($proyecto,$descripcion,$_GET['id']); ?><br>
-        <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
-            <div class="container" id="header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <label class='navbar-brand'>RCase</label>
-                <div  class = "col-lg-6 col-lg-offset-3" > .. . </div> 
+        <div class="container">
+            <h3 id="tituloPrincipal">Requisitos</h3>
+            <hr>
+            <div id="centradoPrimero" class="row">
+                <div class="col-lg-9">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Entrada</th>
+                                <th>Salida</th>
+                                <th>Prioridad</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <?php 
+                        $result = ejecutar("SELECT * FROM `requisitos` WHERE idR = ".$_GET['id']);
+                        if($result){
+                            echo '<tbody>';
+                            while ($cosas = mysqli_fetch_array($result)) {
+                                echo '<tr>';
+                                    echo '<td>';
+                                        echo '<a href="paginaRequisitos.php?id='.$cosas['idReq'].'">';
+                                        echo $cosas['Nombre'];
+                                        echo '</a>';
+                                        echo '</td>';
+                                    echo '<td>'.$cosas['Descripcion'].'</td>';
+                                    echo '<td>'.$cosas['Entrada'].'</td>';
+                                    echo '<td>'.$cosas['Salida'].'</td>';
+                                    echo '<td>'.$cosas['Prioridad'].'</td>';
+                                    echo '<td>'.$cosas['Estado'].'</td>';
+                                echo '</tr>';
+                                
+                            }
+                            echo '</tbody>';
+                        }
+                        ?>
+                    </table>
+                </div> 
+                <div class="col-lg-3">
+                    <form class='form-horizontal' action="altaRequisitos.php" method="POST" onSubmit="altaRequisitos.php" name="idR">
+                        <input id="oculto" type="text" name="idR" value=<?php echo '"'.$_GET['id'].'"'; ?>
+                        class="btn btn-default" />
+                        <input id="buttonAltaProyecto" value="Cargar Un Nuevo Requisito" type="submit" class="btn btn-default"></input>
+                    </form>
+                </div>
             </div>
         </div>
-
-        <h3>Requisitos</h3><br><br>
-        <div class="col-lg-6 col-lg-offset-3">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Entrada</th>
-                        <th>Salida</th>
-                        <th>Prioridad</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <?php 
-                $result = ejecutar("SELECT * FROM `requisitos` WHERE idR = ".$_GET['id']);
-                if($result){
-                    echo '<tbody>';
-                    while ($cosas = mysqli_fetch_array($result)) {
-                        echo '<tr>';
-                            echo '<td>';
-                                echo '<a href="paginaRequisitos.php?id='.$cosas['idReq'].'">';
-                                echo $cosas['Nombre'];
-                                echo '</a>';
-                                echo '</td>';
-                            echo '<td>'.$cosas['Descripcion'].'</td>';
-                            echo '<td>'.$cosas['Entrada'].'</td>';
-                            echo '<td>'.$cosas['Salida'].'</td>';
-                            echo '<td>'.$cosas['Prioridad'].'</td>';
-                            echo '<td>'.$cosas['Estado'].'</td>';
-                        echo '</tr>';
-                        
-                    }
-                    echo '</tbody>';
-                }
-                ?>
-            </table> 
-        </div>
-        <br>
-        <br>
-        <br>
-        <form class='form-horizontal' action="altaRequisitos.php" method="POST" onSubmit="altaRequisitos.php" name="idR">
-                <input id="oculto" type="text" name="idR" value=<?php echo '"'.$_GET['id'].'"'; ?>
-                class="btn btn-default" />
-                <input value="Cargar Un Nuevo Requisito" type="submit" class="btn btn-default"></input>
-        </form>
-
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#buttonAltaProyecto").css("margin-top",($("#centradoPrimero").height()-$("#buttonAltaProyecto").height())/2);
+                $(window).resize(function(){
+                    $("#buttonAltaProyecto").css("margin-top",($("#centradoPrimero").height()-$("#buttonAltaProyecto").height())/2);
+                })
+            })
+        </script>
     </body>
 </html> 

@@ -1,10 +1,11 @@
+<?php include ('barrita.php'); ?>
 <!DOCTYPE html>
 <html class="no-js">
     <head>
         <link rel="icon" type="image/png" href="img/favicon.ico" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title><?php echo $_SESSION['grupo']; ?>/title>
+        <title><?php echo $_SESSION['grupo']; ?></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -14,18 +15,11 @@
         <script></script>
     </head>
     <body>
-        <?php include ('barrita.php'); ?>
         <div class='container'>
             <h1 style='font-weight:bolder;' >Nueva entrevista</h1>
             <hr>
             <div class='row' id='log'>
                 <form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php" name="altaEntrevistas">
-                    <div class="form-group">
-                        <label for="inputDescripcion" class="col-lg-offset-2 col-lg-2 control-label">Descripcion</label>
-                        <div class="col-lg-4">
-                            <input type="text" name="Descripcion" class="form-control" id="inputDescripcion" placeholder="Descripcion">
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="inputProyecto" class="col-lg-offset-2 col-lg-2 control-label">Proyecto</label>
                         <div class="col-lg-4">
@@ -49,11 +43,17 @@
                             </select> 
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputDescripcion" class="col-lg-offset-2 col-lg-2 control-label">Descripcion</label>
+                        <div class="col-lg-4">
+                            <textarea name="Descripcion" rows='10' class="form-control" id="inputDescripcion" placeholder="Descripcion"></textarea>
+                        </div>
+                    </div>
                     <hr>
                     <div class="form-group">
                         <div class="col-lg-offset-6 col-lg-offset-2 col-lg-4">
                             <button id='atras' class="btn btn-default" >Atr&aacute;s</button>
-                            <button typea="submit" class="btn btn-primary" onClick="validar.php;" name="altaEntrevistas">Sign Up</button>
+                            <button typea="submit" class="btn btn-primary" onClick="validar.php;" name="altaEntrevistas">Guardar</button>
                         </div>
                     </div>
                 </form>
