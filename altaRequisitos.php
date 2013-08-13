@@ -27,6 +27,7 @@ $proyecto = traerUno("select nombreProyecto from `proyectos` ".
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Alta de Requisito</title>
+        <link rel="icon" type="image/png" href="img/favicon.ico" />
         <meta name="altaRequisitos" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">

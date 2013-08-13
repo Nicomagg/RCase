@@ -31,6 +31,7 @@ $reqDescripcion = $cosas['reqDescripcion'];
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Requistos para: <?php echo $_SESSION['grupo']; ?></title>
+        <link rel="icon" type="image/png" href="img/favicon.ico" />
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">

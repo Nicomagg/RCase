@@ -36,7 +36,7 @@ if(isset($_POST['loginGrupo'])){
 
 if(isset($_POST['altaEntrevistas'])) {
 	if(!validarCampo('Descripcion') || !validarCampo('Proyecto'))
-		mensajeRedir("Hay campos Invalidos", "index.php");
+		mensajeRedir("Hay campos Invalidos", "paginaProyecto.php?proyecto=".$_POST['Proyecto']);
 		
 	hayCodigoInyectado($_POST['Descripcion']);
 	hayCodigoInyectado($_POST['Proyecto']);
@@ -63,7 +63,7 @@ if(isset($_POST['altaRequisito'])) {
 	if(!validarCampo('Nombre') || !validarCampo('Prioridad') ||
 	 !validarCampo('Descripcion')  || !validarCampo('Entradas')  ||
 	 !validarCampo('Salidas')  || !validarCampo('Estado') || !validarCampo('idR')) 
-		mensajeRedir("Hay campos Invalidos", "index.php");
+		mensajeRedir("Hay campos Invalidos", "paginaRequerimientos.php?id=".$_POST['idR']);
 
 	hayCodigoInyectado($_POST['Nombre']);
 	hayCodigoInyectado($_POST['Descripcion']);
@@ -94,7 +94,7 @@ if(isset($_POST['altaRequisito'])) {
 }
 if(isset($_POST['altaRequerimiento'])) {
 	if(!validarCampo('descripcion') || !validarCampo('Proyecto')) 
-		mensajeRedir("Hay campos Invalidos", "index.php");
+		mensajeRedir("Hay campos Invalidos", "paginaProyecto.php?proyecto=".$_POST['Proyecto']);
 		
 	hayCodigoInyectado($_POST['descripcion']);
 	hayCodigoInyectado($_POST['Proyecto']);
@@ -119,7 +119,7 @@ if(isset($_POST['altaRequerimiento'])) {
 }
 if(isset($_POST['altaProyecto'])) {
 	if(!validarCampo('nombreProyecto') || !validarCampo('nombreCliente') || !validarCampo('telefono')) 
-		mensajeRedir("Hay campos Invalidos", "index.php");
+		mensajeRedir("Hay campos Invalidos", "paginaGrupo.php");
 
 	hayCodigoInyectado($_POST['nombreProyecto']);
 	hayCodigoInyectado($_POST['nombreCliente']);
@@ -144,7 +144,7 @@ if(isset($_POST['altaProyecto'])) {
 }
 if(isset($_POST['altaPersona'])) {
 	if(!validarCampo('nombre') || !validarCampo('apellido') || !validarCampo('dni')) 
-		mensajeRedir("Hay campos Invalidos", "index.php");
+		mensajeRedir("Hay campos Invalidos", "paginaGrupo.php");
 
 	hayCodigoInyectado($_POST['nombre']);
 	hayCodigoInyectado($_POST['apellido']);
