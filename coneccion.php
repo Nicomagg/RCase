@@ -25,7 +25,7 @@ function mensajeRedir($texto,$url){
 
 function ejecutar($consulta){
 	//echo '<br>Consulta : '.$consulta.'<br>';
-	$con=mysqli_connect("localhost","root","","rcase");
+	$con=mysqli_connect("mysql.hostinger.es","u761891976_load","registrodereos","u761891976_rcase");
 	$var = mysqli_query($con,$consulta);
 	mysqli_close($con);
 	return $var;
