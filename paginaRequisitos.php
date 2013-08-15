@@ -13,7 +13,7 @@ if($result == 2)  mensajeRedir("Parece que estas tratando de enviar in id ".
 $result = ejecutar(
 "select p.nombreProyecto as proyecto, ".
 "r.idR as rId, r.descripcion as rDescripcion, ".
-"req.descripcion as reqDescripcion ".
+"req.Nombre as reqNombre ".
 "from requisitos req inner join requerimientos r on req.idR = r.idR ".
 "inner join proyectos p on r.idP = p.idP ".
 "where req.idReq = ".$_GET['id']);
@@ -21,7 +21,7 @@ $cosas = mysqli_fetch_array($result);
 $proyecto = $cosas['proyecto'];
 $rId = $cosas['rId'];
 $rDescripcion = $cosas['rDescripcion'];
-$reqDescripcion = $cosas['reqDescripcion'];
+$reqNombre = $cosas['reqNombre'];
 
 ?>
 <!DOCTYPE html>
@@ -42,6 +42,7 @@ $reqDescripcion = $cosas['reqDescripcion'];
     </head>
     <body>
         <div class="container">
+            <br><?php menuRequisito($proyecto,$rId,$rDescripcion,$reqNombre,$_GET['id']); ?><br>
             <h3 id="tituloPrincipal">Requisitos</h3>
             <hr>
             <div class="col-lg-6 col-lg-offset-3">

@@ -32,7 +32,8 @@
         <script></script>
     </head>
     <body>
-        <div class="container">    
+        <div class="container">
+            <br><?php menuProyecto($_GET['proyecto']); ?><br>    
             <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
                 <div class="container" id="header">
                     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">

@@ -16,8 +16,8 @@
     </head>
     <body>
         <?php include ('barrita.php'); ?>
-        <br><?php menuGrupo(); ?><br>
         <div class="container">
+            <br><?php menuGrupo(); ?><br>
             <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
                 <div class="container" id="header">
                     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">

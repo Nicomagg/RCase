@@ -45,6 +45,7 @@ $proyecto = traerUno("select nombreProyecto from `proyectos` ".
     </head>
     <body>
         <div class="container">
+            <br><?php menuRequerimiento($proyecto,$descripcion,$_GET['id']); ?><br>
             <h3 id="tituloPrincipal">Requisitos</h3>
             <hr>
             <div id="centradoPrimero" class="row">
