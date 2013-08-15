@@ -87,7 +87,7 @@
                 </div>
                 
                 <hr>
-                <h3 id="subtitoPrincipal">Entrevistas</h3>
+                <h3 id='tituloPrincipal'>Entrevistas</h3>
                 <hr>
                 <div id="centradoSegundo" class="row">
                     <div class="col-lg-9">
@@ -125,15 +125,17 @@
                                 Nueva Entrevista
                             </button>
                         </a>
-                    </div> 
-                    <div class="col-lg-3">
-                    <a href="resumenProyecto.php?proyecto=<?php echo $_GET['proyecto']?>">
-                        <button id="buttonAltaPersona" class="btn btn-default" onClick="self.location = resumenProyecto.php">
-                            Ver Resumen Proyecto
-                        </button>
-                    </a>
                     </div>
+                    <hr>
             </div>    
+            <hr>
+            <div class="col-lg-3 col-lg-offset-5">
+            <a href="resumenProyecto.php?proyecto=<?php echo $_GET['proyecto']?>">
+                <button id="buttonAltaPersona" class="btn btn-info" onClick="self.location = resumenProyecto.php">
+                    Ver Resumen Proyecto
+                </button>
+            </a>
+            </div>
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>
