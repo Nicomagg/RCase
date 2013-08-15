@@ -25,7 +25,7 @@ function mensajeRedir($texto,$url){
 
 function ejecutar($consulta){
 	$usuario = 
-    $ar=fopen("hostinger.txt","r+");
+    $ar=fopen("local.txt","r+");
     $text= explode(",",fread($ar,250));
     fclose($ar);
     $servidor = $text[0];
@@ -141,6 +141,13 @@ function traerRequerimientos($proyecto){
 	$result = ejecutar("SELECT idR, descripcion".
 			" FROM `requerimientos` ".
 			" WHERE idP = ".verIdProyecto($proyecto));
+	return $result;
+}
+
+function traerRequisitos($requerimiento){
+	$result = ejecutar("SELECT * ".
+			" FROM `requisitos` ".
+			" WHERE idR = ".$requerimiento);
 	return $result;
 }
 

@@ -125,7 +125,13 @@
                             </button>
                         </a>
                     </div> 
-                </div>
+                    <div class="col-lg-3">
+                    <a href="resumenProyecto.php?proyecto=<?php echo $_GET['proyecto']?>">
+                        <button id="buttonAltaPersona" class="btn btn-default" onClick="self.location = resumenProyecto.php">
+                            Ver Resumen Proyecto
+                        </button>
+                    </a>
+                    </div>
             </div>    
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
