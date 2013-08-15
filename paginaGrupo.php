@@ -16,6 +16,7 @@
     </head>
     <body>
         <?php include ('barrita.php'); ?>
+        <br><?php menuGrupo(); ?><br>
         <div class="container">
             <div class="navbar navbar-inverse navbar-fixed-top hide" id='logo'>
                 <div class="container" id="header">

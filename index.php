@@ -23,15 +23,15 @@
             <div class='row' id='log'>
                 <form class='form-horizontal' action="validar.php" method="POST" onSubmit="validar.php" >
                     <div class="form-group">
-                        <label for="inputUsuario" class="col-lg-offset-2 col-lg-2 control-label">Usuario</label>
+                        <label for="inputUsuario" class="col-lg-offset-2 col-lg-2 control-label">User</label>
                         <div class="col-lg-4">
-                            <input type="text" name="usuario" class="form-control" id="inputUsuario" placeholder="Usuario">
+                            <input type="text" name="usuario" class="form-control" id="inputUsuario" placeholder="User">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputGrupo" class="col-lg-offset-2 col-lg-2 control-label">Grupo</label>
+                        <label for="inputGrupo" class="col-lg-offset-2 col-lg-2 control-label">Group</label>
                         <div class="col-lg-4">
-                            <input type="text" name="grupo" class="form-control" id="inputGrupo" placeholder="Grupo">
+                            <input type="text" name="grupo" class="form-control" id="inputGrupo" placeholder="Group">
                         </div>
                     </div>
                     <div class="form-group">

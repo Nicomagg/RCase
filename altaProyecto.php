@@ -23,19 +23,19 @@
                     <div class="form-group">
                         <label for="inputUsuario" class="col-lg-offset-2 col-lg-2 control-label">Nombre Proyecto</label>
                         <div class="col-lg-4">
-                            <input type="text" name="nombreProyecto" class="form-control" id="inputUsuario" placeholder="Usuario">
+                            <input type="text" name="nombreProyecto" class="form-control" placeholder="Pagina web">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputGrupo" class="col-lg-offset-2 col-lg-2 control-label">Nombre Cliente</label>
                         <div class="col-lg-4">
-                            <input type="text" name="nombreCliente" class="form-control" id="inputGrupo" placeholder="Grupo">
+                            <input type="text" name="nombreCliente" class="form-control" placeholder="Ministerio de Industria">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword" class="col-lg-offset-2 col-lg-2 control-label">Telefono Cliente</label>
                         <div class="col-lg-4">
-                            <input type="text" name="telefono" class="form-control" id="inputPassword" placeholder="Password">
+                            <input type="text" name="telefono" class="form-control" placeholder="3794659865">
                         </div>
                     </div>
                     <hr>
