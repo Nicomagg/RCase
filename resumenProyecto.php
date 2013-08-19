@@ -76,7 +76,7 @@
 							</table>
 	                    </div>
 	                </div>
-                    <br>
+                    <div id="divDeEspacio"></div>
                     <h3 id="subtitoPrincipal">Requisitos</h3>
     				<hr>
     				<div id="centradoPrimero" class="row">
@@ -115,7 +115,7 @@
 		                                    echo '<td>'.$cosas2['idR'].'</td>';
 		                                echo '</tr>';
 		                            	echo '</tbody>';
-		                            	echo '<br>';
+		                            	echo '<div id="divDeEspacio"></div>';
 		                        	}
 		                		} ?>
 		            		</table> 
@@ -159,7 +159,14 @@
                     </table> 
                 </div>
         	</div>
-        </div>     
+        </div>
+        <div class="col-lg-3 col-lg-offset-5">
+            <a href="archivoResumen.php?proyecto=<?php echo $_GET['proyecto']?>">
+                <button id="buttonAltaPersona" class="btn btn-info">
+                Descargar Resumen
+                </button>
+            </a>
+        </div>
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/plugins.js"></script>

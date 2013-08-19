@@ -42,7 +42,9 @@ $reqNombre = $cosas['reqNombre'];
     </head>
     <body>
         <div class="container">
-            <br><?php menuRequisito($proyecto,$rId,$rDescripcion,$reqNombre,$_GET['id']); ?><br>
+            <div id="divDeEspacio"></div>
+            <?php menuRequisito($proyecto,$rId,$rDescripcion,$reqNombre,$_GET['id']); ?>
+            <div id="divDeEspacio"></div>
             <h3 id="tituloPrincipal">Requisitos</h3>
             <hr>
             <div class="col-lg-6 col-lg-offset-3">

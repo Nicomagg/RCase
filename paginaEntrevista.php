@@ -44,7 +44,9 @@ $proyecto = traerUno("select nombreProyecto from `proyectos` ".
     </head>
     <body>
         <div class="container">
-            <br><?php menuEntrevistas($proyecto,$descripcion,$_GET['id']); ?><br>
+            <div id="divDeEspacio"></div>
+            <?php menuEntrevistas($proyecto,$descripcion,$_GET['id']); ?>
+            <div id="divDeEspacio"></div>
             <h3 id="tituloPrincipal">Entrevista</h3>
             <hr>
             <div class="col-lg-6 col-lg-offset-3">
